@@ -17,22 +17,21 @@ function download_and_extract {
 }
 
 function setup_emsdk {
-	download_and_extract \
-        https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz \
-        emsdk-portable.tgz \
-        5524019776723b42ce731f20d9dff91be63c8f50
-
-	emsdk-portable/emsdk update
-	emsdk-portable/emsdk install latest
-	emsdk-portable/emsdk activate latest
-	source emsdk-portable/emsdk_env.sh
+	if [ ! -d emsdk ] ; then
+		git clone https://github.com/emscripten-core/emsdk.git
+	else
+		git -C emsdk pull
+	fi
+	emsdk/emsdk install latest
+	emsdk/emsdk activate latest
+	source emsdk/emsdk_env.sh
 }
 
 function fetch_icu {
 	download_and_extract \
-        http://download.icu-project.org/files/icu4c/62.1/icu4c-62_1-src.tgz \
-        icu62_1.tgz \
-        8a216e755cddd169b9ec8cc7edeed38824900f06
+        https://github.com/unicode-org/icu/releases/download/release-62-2/icu4c-62_2-src.tgz \
+        icu62_2.tgz \
+        93af1b9bbb8a0f1fcdfd2dc6b8638e380f68b035
         cp -R icu icu-llvm
 }
 

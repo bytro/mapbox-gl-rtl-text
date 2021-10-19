@@ -1,6 +1,6 @@
 .DS_Store
 *~
-/emsdk-portable
+/emsdk
 /icu
 /icu-llvm
 *.tgz
